@@ -3,12 +3,29 @@ name: Events Demo 1
 #   pull_request:
 #     types: [opened, reopened]
 on:
+  workflow_dispatch:    # this means that the workflow will be triggered manually
   pull_request:
     types:
       - opened
     branches:
-      - 'releases/**'
-  workflow_dispatch:    
+      - main
+      - 'releases/**' # this means all branches with name starting with releases
+      - 'feature/**'  # this means all branches with name starting with feature
+      - 'bugfix/**'  # this means all branches with name starting with bugfix
+      - 'hotfix/**'  # this means all branches with name starting with hotfix
+      - 'develop'    # this means the develop branch
+      - 'production' # this means the production branch
+
+  push:
+    branches:
+      - main
+      - 'releases/**' # this means all branches with name starting with releases
+      - 'feature/**'  # this means all branches with name starting with feature
+      - 'bugfix/**'  # this means all branches with name starting with bugfix
+      - 'hotfix/**'  # this means all branches with name starting with hotfix
+      - 'develop'    # this means the develop branch
+      - 'production' # this means the production branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
